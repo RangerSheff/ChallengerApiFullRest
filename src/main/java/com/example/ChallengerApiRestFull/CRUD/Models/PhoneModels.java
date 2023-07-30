@@ -13,9 +13,6 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class PhoneModels {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
     @Column
     private Long number;
 
@@ -26,21 +23,15 @@ public class PhoneModels {
     private Long countryCode;
 
     public PhoneModels() {
-        this.id = UUID.randomUUID();
         this.number = 0L;
         this.cityCode = 0L;
         this.countryCode = 0L;
     }
 
-    public PhoneModels(UUID id, Long number, Long cityCode, Long countryCode) {
-        this.id = id;
+    public PhoneModels(Long number, Long cityCode, Long countryCode) {
         this.number = number;
         this.cityCode = cityCode;
         this.countryCode = countryCode;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     private void setNumber(Long number) {

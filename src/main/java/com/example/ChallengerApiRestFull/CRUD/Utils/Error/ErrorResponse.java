@@ -1,4 +1,4 @@
-package com.example.ChallengerApiRestFull.CRUD.Utils;
+package com.example.ChallengerApiRestFull.CRUD.Utils.Error;
 
 import java.util.List;
 
@@ -13,13 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ErrorResponse {
     private int status;
-
     private String message;
-
     private String timestamp;
-
-    List<String> errors;
-
     ErrorResponse(String message) {
         this.message = message;
     }

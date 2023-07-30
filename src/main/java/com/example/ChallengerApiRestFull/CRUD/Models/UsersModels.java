@@ -1,6 +1,6 @@
 package com.example.ChallengerApiRestFull.CRUD.Models;
 
-import com.example.ChallengerApiRestFull.CRUD.Utils.JWT;
+import com.example.ChallengerApiRestFull.CRUD.Utils.JWT.JWT;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -69,7 +69,7 @@ public class UsersModels {
     }
 
     public UsersModels(String name, String email, String password, List<PhoneModels> phones, Boolean isActive) {
-        this.id = UUID.fromString(email);
+        this.id = UUID.randomUUID();
         this.name = name;
         this.email = email;
         this.password = password;
@@ -77,15 +77,31 @@ public class UsersModels {
         this.created = new Date();
         this.modified = null;
         this.lastLogin = null;
-        this.token = JWT.createJwt(email);
+        this.token = UUID.randomUUID().toString();
+        //JWT jwt = new JWT();
+        //this.token = jwt.createJwt(email);
         this.isActive = isActive;
     }
 
-    private void setId(UUID id) {
+    public UsersModels(UUID id, String name, String email, String password, Date created, List<PhoneModels> phones, String token, Boolean isActive) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phones = phones;
+        this.created = created;
+        this.modified = new Date();
+        this.lastLogin = created;
+        this.token = token;
+        this.isActive = isActive;
+    }
+
+
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -93,7 +109,7 @@ public class UsersModels {
         this.email = email;
     }
 
-    private void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -101,7 +117,7 @@ public class UsersModels {
         this.phones = phones;
     }
 
-    private void setCreated(Date created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
@@ -113,15 +129,15 @@ public class UsersModels {
         this.lastLogin = lastLogin;
     }
 
-    private void setToken(String token) {
+    public void setToken(String token) {
         this.token = token;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
+    public void setIsActive(Boolean active) {
         isActive = active;
     }
 }

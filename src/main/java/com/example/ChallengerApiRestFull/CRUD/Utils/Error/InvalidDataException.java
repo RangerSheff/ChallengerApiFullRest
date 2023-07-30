@@ -1,10 +1,14 @@
-package com.example.ChallengerApiRestFull.CRUD.Utils;
+package com.example.ChallengerApiRestFull.CRUD.Utils.Error;
 
+import lombok.Getter;
 import org.springframework.validation.BindingResult;
 
-public class InvalidDataException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
+import java.io.Serial;
 
+@Getter
+public class InvalidDataException extends RuntimeException {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private final transient BindingResult result;
 
     public InvalidDataException(BindingResult result) {
@@ -17,7 +21,4 @@ public class InvalidDataException extends RuntimeException {
         this.result = result;
     }
 
-    public BindingResult getResult() {
-        return result;
-    }
 }

@@ -1,4 +1,4 @@
-package com.example.ChallengerApiRestFull.CRUD.Utils;
+package com.example.ChallengerApiRestFull.CRUD.Utils.Error;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,8 +47,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     protected ResponseEntity<ErrorResponse> handleException(MethodArgumentTypeMismatchException exc) {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-        // Aplica cuando en el URL se envia un argumento invalido, por ejemplo String
-        // por Integer
         return buildResponseEntity(httpStatus, new RuntimeException("Tipo de Argumento invalido"));
     }
 
@@ -63,12 +62,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<ErrorResponse> buildResponseEntity(HttpStatus httpStatus, Exception exc, List<String> errors) {
         ErrorResponse error = new ErrorResponse();
-        DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        DateFormat format = new SimpleDateFormat("HH:mm:ss");
         error.setMessage(exc.getMessage());
         error.setStatus(httpStatus.value());
-        error.setTimestamp(formatoHora.format(new Date()));
-        error.setErrors(errors);
+        error.setTimestamp(format.format(new Date()));
         return new ResponseEntity<>(error, httpStatus);
-
     }
 }
